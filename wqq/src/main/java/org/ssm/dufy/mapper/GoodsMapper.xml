@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssm.dufy.dao.GoodsDao">
+	<resultMap type="Goods" id="goodsMap">
+		<id column="ID" jdbcType="INTEGER" property="id"/>
+		<result column="PRICE" jdbcType="INTEGER" property="price" />
+		<result column="NUM" jdbcType="INTEGER" property="num" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+	</resultMap>
+	<sql id="columns">
+		ID,
+		PRICE,
+		DESCRIPTION,
+		NUM
+	</sql>
+	
+	<select id="getAllRecord" parameterType="java.util.Map" resultMap="goodsMap">
+		SELECT 
+		<include refid="columns"/>
+		FROM 
+		goods 
+	</select>
+	
+</mapper>

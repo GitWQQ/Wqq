@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/cache 
+    http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">
+    
+     <!-- 扫描controller（controller层注入） -->
+    <context:component-scan base-package="org.ssm.dufy.web">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+
+    <!-- 注解驱动 -->
+    <mvc:annotation-driven />
+    
+    <!-- 静态资源映射 -->
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    
+    <!-- 视图解析器JSP -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>  
+    
+	<!-- 配置视图解析器freeMarker -->
+	<bean id="viewResolverFtl"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		 <!-- 自定义FreeMarkerView，用来定义项目的全局路径 -->
+		<property name="viewClass" value="org.ssm.dufy.util.freemarker.MyFreeMarkerView" />
+		<!-- 把Freemarker 扩展一下，把相关属性加入进去 -->
+		<property name="contentType" value="text/html; charset=utf-8" />
+		<property name="cache" value="true" />
+		<property name="suffix" value=".ftl" />
+		<property name="order" value="0" />
+	</bean>
+	 <!-- 配置freeMarker的模板路径 -->  
+	 <bean id="freemarkConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	 	<property name="templateLoaderPath">
+	 		<value>/WEB-INF/ftl</value>
+	 	</property>
+	 	<property name="freemarkerVariables">
+	 		<map>
+	 			<entry key="xml_escape" value-ref="fmXmlEscape"/>
+	 		</map>
+	 	</property>
+	 	<property name="defaultEncoding">
+	 		<value>utf-8</value>
+	 	</property>
+	 	<property name="freemarkerSettings">
+	 		<props>
+	 			<!-- 该参数用来指定更新模板文件的间隔时间 ，相当于多长时间检测一下是否有必要重新加载模板文件
+	 			0：表示不从缓存中获取，直接引用ftl文件，FreeMarker：表示通过将模板文件的内容缓存，降低模板文件的读取频率-->
+	 			<prop key="template_update_delay">0</prop>
+	 		</props>
+	 	</property>
+	 </bean>
+	 <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+	 
+	
+	<!-- 上传文件的设置 ，maxUploadSize=-1，表示无穷大。uploadTempDir为上传的临时目录 --> 
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>10485760</value>
+        </property>
+    </bean>
+    
+    
+    
+</beans>   
