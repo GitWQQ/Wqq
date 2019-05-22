@@ -7,21 +7,22 @@ public class FileDemo {
 	
 	public static void main(String[] arg){
 		createFileDir("D://FileDemoDir");
+		
 	}
-	//´´½¨Ò»¸öÎÄ¼þÄ¿Â¼£¨ÎÄ¼þ¼Ð£©
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð£ï¿½
 	public static void createFileDir(String fileDirName){
 		File file=new File(fileDirName);
 		if(!file.exists()){
 			file.mkdirs();
 		}
 		
-		//´´½¨Ò»¸önextFileÄ¿Â¼£¨¶à¼¶Ä¿Â¼£©
+		//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½nextFileÄ¿Â¼ï¿½ï¿½ï¿½à¼¶Ä¿Â¼ï¿½ï¿½
 		File nextFile=new File(file,"fileChild");
 		if(!nextFile.exists()){
-			//mkdirs()¿ÉÒÔ´´½¨¶à¼¶ÎÄ¼þ¼Ð£¬¶ømkdir()Ö»ÄÜ´´½¨Ò»¼¶ÎÄ¼þ¼Ð
+			//mkdirs()ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½à¼¶ï¿½Ä¼ï¿½ï¿½Ð£ï¿½ï¿½ï¿½mkdir()Ö»ï¿½Ü´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 			nextFile.mkdirs();
 		}
-		System.out.println("nextFile.getParent()Îª£º"+nextFile.getParent());
+		System.out.println("nextFile.getParent()Îªï¿½ï¿½"+nextFile.getParent());
 		if(nextFile.isDirectory()){
 			File newFile=new File(nextFile,"file.txt");
 			if(!newFile.exists()){
@@ -30,10 +31,10 @@ public class FileDemo {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("ÎÄ¼þÃûÎª£º"+newFile.getName());
-				System.out.println("ÎÄ¼þµÄ¾ø¶ÔÂ·¾¶ÊÇ£º"+newFile.getAbsolutePath());
+				System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½Îªï¿½ï¿½"+newFile.getName());
+				System.out.println("ï¿½Ä¼ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ç£ï¿½"+newFile.getAbsolutePath());
 			}
-			//Ò»´ÎÐÔ´´½¨¶à¸öÎÄ±¾ÎÄ¼þ²¢ÎªËûÃÇ¸³ÎÄ¼þÃû
+			//Ò»ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 			for(int i=1;i<5;i++){
 				File listFile=new File(nextFile,"file"+i+".txt");
 				if(!listFile.exists()){
@@ -45,9 +46,9 @@ public class FileDemo {
 					}
 				}
 			}
-			//½«nextFileÂ·¾¶ÏÂµÄÎÄ¼þÃûÊä³ö
+			//ï¿½ï¿½nextFileÂ·ï¿½ï¿½ï¿½Âµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			String [] list=nextFile.list();
-			System.out.println("nextFileÎÄ¼þÄ¿Â¼ÏÂµÄËùÓÐÎÄ¼þ£º");
+			System.out.println("nextFileï¿½Ä¼ï¿½Ä¿Â¼ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½");
 			for (int i = 0; i < list.length; i++) {
 				System.err.println(list[i]);
 			}
