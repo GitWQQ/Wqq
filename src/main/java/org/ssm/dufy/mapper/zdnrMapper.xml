@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.ssm.dufy.dao.CombotreeDao">
+	<resultMap type="Zd" id="zdMap">
+		<result column="zddm" jdbcType="VARCHAR" property="zddm"/>
+		<result column="dm" jdbcType="VARCHAR" property="dm"/>
+		<result column="mc" jdbcType="VARCHAR" property="mc"/>
+		<result column="jc" jdbcType="VARCHAR" property="jc"/>
+		<result column="py" jdbcType="VARCHAR" property="py"/>
+		<result column="sjdm" jdbcType="VARCHAR" property="sjdm"/>
+		<result column="bz" jdbcType="VARCHAR" property="bz"/>
+		<result column="px" jdbcType="INTEGER" property="px"/>
+		<result column="yxx" jdbcType="INTEGER" property="yxx"/>
+	</resultMap>
+	
+	<sql id="columns">
+		zddm,
+		dm,
+		mc,
+		jc,
+		py,
+		sjdm,
+		bz,
+		px,
+		yxx
+	</sql>
+	<select id="queryAllZdnr" parameterType="java.util.Map" resultMap="zdMap" >
+		SELECT <include refid="columns"/> FROM t_sys_zdnr
+		<where>
+			<if test="sjdm !=null and sjdm !=''">
+				sjdm=#{sjdm,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

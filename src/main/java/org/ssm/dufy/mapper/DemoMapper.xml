@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ssm.dufy.dao.DemoDao" >
+	<cache/>
+    <resultMap  type="Goods" id="goodsMap">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="price" jdbcType="INTEGER"  property="price"/>
+        <result column="description" jdbcType="VARCHAR" property="description" />
+    </resultMap>
+    <sql id="columns">
+        id,price,description
+    </sql>
+    <select id="queryAllRecord" parameterType="int"  resultMap="goodsMap">
+        SELECT 
+        id,price,description
+        FROM 
+        goods where id=#{id,jdbcType=VARCHAR}
+    </select>
+    <update id="updatePrice" parameterType="Goods">
+    	UPDATE  goods 
+    	<set>
+    		<if test="price !=null and price !=''">
+    			price =#{price,jdbcType=INTEGER},
+    		</if>
+    	</set>
+    	WHERE id=#{id,jdbcType=INTEGER} 
+    </update>
+</mapper>
